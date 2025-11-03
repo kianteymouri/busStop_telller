@@ -3,17 +3,15 @@ from PIL import Image, ImageDraw, ImageFont
 import time, os
 from datetime import datetime
 
-API_KEY = "inset your API here"
+API_KEY = "put your own api here
 DEBUG = False  # Set True to see which stops/routes return data
 
-
-#change ur destinations and specific bus stops
 ROUTES = [
-    {"label": "Bus 36", "route_id": "36", "stop_id": "50575", "dest": "RSF / Telegraph"},
+    {"label": "Bus 36E", "route_id": "36", "stop_id": "50575", "dest": "RSF / Telegraph"},
     {"label": "Bus 7",  "route_id": "7",  "stop_id": "55452", "dest": "Soda Hall"},
-    {"label": "Bus 12", "route_id": "12", "stop_id": "51622", "dest": "Trader Joe's"},
-    {"label": "Bus 12", "route_id": "12", "stop_id": "58115", "dest": "Ashby Station"},
-    {"label": "Bus 36", "route_id": "36", "stop_id": "58575", "dest": "Emeryville"},
+    {"label": "Bus 12N", "route_id": "12", "stop_id": "51622", "dest": "Trader Joe's"},
+    {"label": "Bus 12S", "route_id": "12", "stop_id": "58115", "dest": "Ashby Station"},
+    {"label": "Bus 36W", "route_id": "36", "stop_id": "58575", "dest": "Emeryville"},
 ]
 
 def safe_json(resp):
@@ -23,45 +21,56 @@ def safe_json(resp):
         return []
 
 def fetch_arrivals(stop_id, route_id, label, dest_name):
-    """Fetch *only* live arrivals for accuracy"""
+    """Fetch live predictions, then fallback to near-term schedule"""
     arrivals = []
     now = datetime.now()
 
+    # --- Try live data ---
     try:
         url = f"https://api.actransit.org/transit/stops/{stop_id}/predictions?token={API_KEY}"
         resp = requests.get(url, timeout=5)
         data = safe_json(resp)
-
-        if DEBUG:
-            print(f"Stop {stop_id} returned {len(data)} entries")
-
         for p in data:
             route = p.get("RouteName", "")
             if route != route_id:
                 continue
-
             dep_str = p.get("PredictedDeparture")
-            if not dep_str:
-                continue
-
-            try:
+            if dep_str:
                 dep_time = datetime.strptime(dep_str, "%Y-%m-%dT%H:%M:%S")
                 mins = int((dep_time - now).total_seconds() / 60)
-                if 0 <= mins <= 90:  # only show upcoming buses within 1.5 hours
+                if 0 <= mins <= 90:
                     arrivals.append({
                         "label": label,
-                        "dest": dest_name,
+                        "dest": dest_name + " (live)",
                         "eta": f"{mins} min ({dep_time.strftime('%I:%M %p')})",
                         "abs_time": dep_time
                     })
-            except Exception:
-                continue
-
     except Exception as e:
-        if DEBUG:
-            print(f"Error fetching stop {stop_id}: {e}")
+        print(f"Live fetch error for {stop_id}: {e}")
+
+    # --- Fallback to scheduled trips if no live buses soon ---
+    if not arrivals:
+        try:
+            sched_url = f"https://api.actransit.org/transit/route/{route_id}/schedule/current?stopId={stop_id}&token={API_KEY}"
+            resp = requests.get(sched_url, timeout=5)
+            data = safe_json(resp)
+            for s in data:
+                dep_str = s.get("DepartureTime")
+                if dep_str:
+                    dep_time = datetime.strptime(dep_str, "%Y-%m-%dT%H:%M:%S")
+                    mins = int((dep_time - now).total_seconds() / 60)
+                    if 0 <= mins <= 90:  # only next hour & a half
+                        arrivals.append({
+                            "label": label,
+                            "dest": dest_name + " (sched.)",
+                            "eta": f"{mins} min ({dep_time.strftime('%I:%M %p')})",
+                            "abs_time": dep_time
+                        })
+        except Exception as e:
+            print(f"Schedule fallback error for {stop_id}: {e}")
 
     return arrivals
+
 
 def draw_display(flat_arrivals):
     """Render the display"""
