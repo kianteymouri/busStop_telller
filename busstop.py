@@ -3,9 +3,11 @@ from PIL import Image, ImageDraw, ImageFont
 import time, os
 from datetime import datetime
 
-API_KEY = "put your own api here
+API_KEY = "put your own api here"
 DEBUG = False  # Set True to see which stops/routes return data
 
+
+#change these stops to ur own, visit google maps and click on stop for stop ID
 ROUTES = [
     {"label": "Bus 36E", "route_id": "36", "stop_id": "50575", "dest": "RSF / Telegraph"},
     {"label": "Bus 7",  "route_id": "7",  "stop_id": "55452", "dest": "Soda Hall"},
