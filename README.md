@@ -7,39 +7,50 @@ instructables link
 
 
 Materials
--Waveshare 7.5in (or any other size) Epaper Display
--Raspberry Pi Zero W (or other vairation)
+-Waveshare 7.5in (or any other size) Epaper Display : https://www.waveshare.com/7.5inch-e-paper-hat-b.htm 
+-Raspberry Pi Zero W (or other vairation): 
 -HDMI, keyboard, mouse, power cords
 -3D Printer + Filament
--2x4mm Screws (6)
+-2x4mm Screws (6) 
 
-
-//TODO: fix all of these
 
 1. Preperation + Connection
 
    If this is your first time working with a Raspberry Pi I would really recommend downloading the Desktop version of Raspbian to get some intuition for whats going on. To connect to our pi so we dont have to constantly have a keyboard, mouse, and external monitor connected well download vnc and setup ssh to our pi. Both methods work but I personally prefer ssh. These steps will especially come in handy if you have a raspberry pi zero with only one available usb connection.
    The next steps are assuming you have the RPI 32 bit lite installed.
    
-   For SSH run the following commands in pi terminal
-   >hostname -I
-   >sudo raspi-config
-   >interface options -> SSH (and VNC if you want) -> enable -> finish
-   >on your PC terminal type ssh pi@"ip adress of pi" : (also change the pi before the @ if your local host name is different)
+   a) For SSH run the following commands in pi terminal
 
-   For VNC do the following
-   >sudo apt update
-   >sudo apt upgrade
-   >sudo apt install -y realvnc-vnc-server realvnc-vnc-viewer
-   >sudo raspi-config
-   >interface options -> VNC -> enable ->finish
-   >sudo systemctl enable --now vncserver-x11-serviced.service
    >hostname -I
-   >on you PC open up the VNC software and type in your IP to connect
+
+   >sudo raspi-config
+
+   interface options -> SSH (and VNC if you want) -> enable -> finish
+
+   on your PC terminal type ssh pi@"ip adress of pi" : (also change the pi before the @ if your local host name is different)
+
+   b) For VNC do the following
    
-   -connect waveshare ribbons(be gentle)
-   -connect pins
-   -ensure correction path selections
+   >sudo apt update
+   
+   >sudo apt upgrade
+   
+   >sudo apt install -y realvnc-vnc-server realvnc-vnc-viewer
+   
+   >sudo raspi-config
+   
+   interface options -> VNC -> enable ->finish
+   
+   >sudo systemctl enable --now vncserver-x11-serviced.service
+   
+   >hostname -I
+   
+   on you PC open up the VNC software and type in your IP to connect
+   
+   c)Connect Epaper ribbons to SPI controller and then connect SPI controller ribonns to driver. Make sure on the SPI controller modes are on the correct ones. For 4" displays and up the Display Config Switch should be on A=3R. Smaller displays should be set to 0.47R. The Interface Config switch should be set to 0 = 4-line SPI (this is the correct mode for an Pi). Final Connection should look like this: <img width="419" height="375" alt="Screenshot 2025-11-08 at 3 51 19 PM" src="https://github.com/user-attachments/assets/03d366e5-0eeb-480a-96f9-c8729dee2423" />
+
+
+   d)Connect 40 Pin Header to Raspberry Pi pins, making sure they align on top of each other, almost like stacking. 
 
 3. Testing
    First we must make sure that everything is working correctly by running Waveshare's testing code. This essentially just flashes a couple images to the display and if everything is connected properly and no issues happened you should be able to see those previews.
