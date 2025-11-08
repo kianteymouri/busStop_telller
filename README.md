@@ -3,6 +3,7 @@ Bus Stop Arrival Display using Raspi Zero and Epaper Display
 
 image here
 youtube link here
+instructables link
 
 
 Materials
@@ -10,26 +11,61 @@ Materials
 -Raspberry Pi Zero W (or other vairation)
 -HDMI, keyboard, mouse, power cords
 -3D Printer + Filament
--Screw
-//TODO: add screw sizing
+-2x4mm Screws (6)
 
 
 //TODO: fix all of these
 
-1. Connection
-   -connect raspberry pi and possible get vnc or ssh connected before hand
+1. Preperation + Connection
+
+   If this is your first time working with a Raspberry Pi I would really recommend downloading the Desktop version of Raspbian to get some intuition for whats going on. To connect to our pi so we dont have to constantly have a keyboard, mouse, and external monitor connected well download vnc and setup ssh to our pi. Both methods work but I personally prefer ssh. These steps will especially come in handy if you have a raspberry pi zero with only one available usb connection.
+   The next steps are assuming you have the RPI 32 bit lite installed.
+   
+   For SSH run the following commands in pi terminal
+   >hostname -I
+   >sudo raspi-config
+   >interface options -> SSH (and VNC if you want) -> enable -> finish
+   >on your PC terminal type ssh pi@"ip adress of pi" : (also change the pi before the @ if your local host name is different)
+
+   For VNC do the following
+   >sudo apt update
+   >sudo apt upgrade
+   >sudo apt install -y realvnc-vnc-server realvnc-vnc-viewer
+   >sudo raspi-config
+   >interface options -> VNC -> enable ->finish
+   >sudo systemctl enable --now vncserver-x11-serviced.service
+   >hostname -I
+   >on you PC open up the VNC software and type in your IP to connect
+   
    -connect waveshare ribbons(be gentle)
    -connect pins
    -ensure correction path selections
 
 3. Testing
-   -make sure everything works by running wavehsare github display test
+   First we must make sure that everything is working correctly by running Waveshare's testing code. This essentially just flashes a couple images to the display and if everything is connected properly and no issues happened you should be able to see those previews.
+   The link to the manual: https://www.waveshare.com/wiki/7.5inch_e-Paper_HAT
+   The link to the Raspberry Pi connected Display Manual: https://www.waveshare.com/wiki/7.5inch_e-Paper_HAT_Manual#Working_With_Raspberry_Pi
 
-4. Customization
+   
+   
+   -make sure everything works by running wavehsare github display test
+   
+
+5. Customization
    -coding portion, my work can be seen in busstop.py
 
 6. Assembly
-   -print 3d printed frame parts from my makerspace for one for wall mount
-   -or link desktop frame thingiverse
+   I 3D modeled a frame design for my wall, its pretty standard and is designed for one wall thumbtack but has a wide enough base to be oriented upright on a desk.
+
+   things the print needs to have:
+   -thumbtack slot like link
+   -filet on side for wire
+   -indent for epaper display
+   -cover for display that attached via screws to the ocver
+   -pillars for connector and pi+hat with 2mm screws
+   -lip for ribbon
+   
+   -print 3d printed frame parts from my makerspace for one for wall mount, cad this: https://www.thingiverse.com/thing:3996613 
+   -Or: A really great Desktop design by user Cybernetic on Thingiverse : https://www.thingiverse.com/thing:4807262
 
 Thats it
