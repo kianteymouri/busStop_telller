@@ -90,7 +90,17 @@ Materials
 
 5. Customization
    
-   To add the bus stop code, theres some stuff we have to do first. Before anything we have to get an API key from the AC Transit website. I am using AC Transit because it's the buses I use but most public transit organizations will have their own website where you can get an API key and gather data. Research online for your case.
+   To add the bus stop code, theres some stuff we have to do first. Before anything we have to get an API key from the AC Transit website. I am using AC Transit because it's just because its the buses I use specifically but most public transit organizations will have their own website where you can get an API key and gather data. Research online for your case.
+   To get the AC Transit API go here: https://api.actransit.org/transit, register and copy your api to be pasted into the busstop.py code.
+
+   The python scripts essentially calls the AC Transit API, uses Pillow to draw the image, saves that image as a png and then pushes it to the epaper display. Updates every 60 seconds and sorts by soonest arrival.
+
+   Before running the code, you have to
+   a)insert your own API in place of API_KEY
+   b)alter the routes to your own. To do this go to Google Maps, click on the bus stop you want to watch and get the ID. You can then change the description of the bus stop and also what you want it labeled as.
+   c)edit the epaper image in the "draw_display" function if you would like
+
+   After you have finalized your code you have to make it run on the pi. //TODO: explain this
    
 7. Assembly
    I 3D modeled a frame design for my wall, its pretty standard and is designed for one wall thumbtack but has a wide enough base to be oriented upright on a desk.
