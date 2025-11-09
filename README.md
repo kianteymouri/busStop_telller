@@ -60,6 +60,7 @@ Materials
    Final Connection should look like this: <img width="419" height="375" alt="Screenshot 2025-11-08 at 3 51 19 PM" src="https://github.com/user-attachments/assets/03d366e5-0eeb-480a-96f9-c8729dee2423" />
 
 3. Testing
+   
    First we must make sure that everything is working correctly by running Waveshare's testing code. This essentially just flashes a couple images to the display and if everything is connected properly and no issues happened you should be able to see those previews.
    
    The link to the manual: https://www.waveshare.com/wiki/7.5inch_e-Paper_HAT
@@ -84,8 +85,10 @@ Materials
    
 
 5. Customization
-   To add the bus stop code, theres some stuff we have to do first. Before anything we have to get an API key from the AC Transit website. I am using AC Transit because it's the buses I use but most public transit organizations will have their own website where you can get an API key and gather data. Research online for your case. 
-6. Assembly
+   
+   To add the bus stop code, theres some stuff we have to do first. Before anything we have to get an API key from the AC Transit website. I am using AC Transit because it's the buses I use but most public transit organizations will have their own website where you can get an API key and gather data. Research online for your case.
+   
+7. Assembly
    I 3D modeled a frame design for my wall, its pretty standard and is designed for one wall thumbtack but has a wide enough base to be oriented upright on a desk.
 
    things the print needs to have:
@@ -99,4 +102,4 @@ Materials
    -print 3d printed frame parts from my makerspace for one for wall mount, cad this: https://www.thingiverse.com/thing:3996613 
    -Or: A really great Desktop design by user Cybernetic on Thingiverse : https://www.thingiverse.com/thing:4807262
 
-Thats it
+Thats it. Thanks!
