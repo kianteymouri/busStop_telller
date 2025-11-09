@@ -96,8 +96,11 @@ Materials
    The python scripts essentially calls the AC Transit API, uses Pillow to draw the image, saves that image as a png and then pushes it to the epaper display. Updates every 60 seconds and sorts by soonest arrival.
 
    Before running the code, you have to
+   
    a)insert your own API in place of API_KEY
+   
    b)alter the routes to your own. To do this go to Google Maps, click on the bus stop you want to watch and get the ID. You can then change the description of the bus stop and also what you want it labeled as.
+   
    c)edit the epaper image in the "draw_display" function if you would like
 
    After you have finalized your code you have to make it run on the pi. //TODO: explain this
