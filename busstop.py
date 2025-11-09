@@ -6,7 +6,7 @@ import os, time, requests
 from datetime import datetime
 from PIL import Image, ImageDraw, ImageFont
 
-//change to ur own
+#change to ur own
 API_KEY = "________"
 
 # Panel settings
@@ -17,7 +17,7 @@ REFRESH_SEC = 60
 HEADER_TEXT = "UPCOMING BUSSES"
 
 
-//change these routes.
+#change these routes.
 ROUTES = [
     {"label": "Bus 36E", "route_id": "36", "stop_id": "50575", "dest": "RSF / Telegraph"},
     {"label": "Bus 7",   "route_id": "7",  "stop_id": "55452", "dest": "Soda Hall"},
