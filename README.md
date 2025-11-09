@@ -1,8 +1,12 @@
 # busStop_telller
 Bus Stop Arrival Display using Raspi Zero and Epaper Display
 
-image here
+<img width="810" height="568" alt="Screenshot 2025-11-08 at 8 40 13 PM" src="https://github.com/user-attachments/assets/194d4916-e3c4-4231-a611-08ba15844ef4" />
+
+
+
 youtube link here
+
 instructables link
 
 
