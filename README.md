@@ -7,11 +7,17 @@ instructables link
 
 
 Materials
+
 -Waveshare 7.5in (or any other size) Epaper Display : https://www.waveshare.com/7.5inch-e-paper-hat-b.htm 
--Raspberry Pi Zero W (or other vairation): 
+
+-Raspberry Pi Zero W (or other vairation)
+
 -HDMI, keyboard, mouse, power cords
+
 -3D Printer + Filament
+
 -2x4mm Screws (6) 
+
 
 
 1. Preperation + Connection
@@ -54,17 +60,30 @@ Materials
 
 3. Testing
    First we must make sure that everything is working correctly by running Waveshare's testing code. This essentially just flashes a couple images to the display and if everything is connected properly and no issues happened you should be able to see those previews.
+   
    The link to the manual: https://www.waveshare.com/wiki/7.5inch_e-Paper_HAT
+   
    The link to the Raspberry Pi connected Display Manual: https://www.waveshare.com/wiki/7.5inch_e-Paper_HAT_Manual#Working_With_Raspberry_Pi
 
+   Run the following commands:
+   >sudo raspi-config nonint do_spi 0
    
+   >sudo apt update
    
-   -make sure everything works by running wavehsare github display test
+   >sudo apt install -y python3-pip python3-pil python3-spidev python3-rpi.gpio git
+   
+   >cd ~
+   git clone https://github.com/waveshare/e-Paper.git
+   
+   >cd ~/e-Paper/RaspberryPi_JetsonNano/python/examples
+   sudo python3 epd_7in5_V2_test.py
+
+   If everything worked properly you should see a few images flash and the epaper display refresh a couple times before turning off.
+   Note: Change the test depending on your epaper display size and specifications.
    
 
 5. Customization
-   -coding portion, my work can be seen in busstop.py
-
+   To add the bus stop code, theres some stuff we have to do first. Before anything we have to get an API key from the AC Transit website. I am using AC Transit because it's the buses I use but most public transit organizations will have their own website where you can get an API key and gather data. Research online for your case. 
 6. Assembly
    I 3D modeled a frame design for my wall, its pretty standard and is designed for one wall thumbtack but has a wide enough base to be oriented upright on a desk.
 
