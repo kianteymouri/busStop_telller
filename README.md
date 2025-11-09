@@ -53,10 +53,11 @@ Materials
    
    on you PC open up the VNC software and type in your IP to connect
    
-   c)Connect Epaper ribbons to SPI controller and then connect SPI controller ribonns to driver. Make sure on the SPI controller modes are on the correct ones. For 4" displays and up the Display Config Switch should be on A=3R. Smaller displays should be set to 0.47R. The Interface Config switch should be set to 0 = 4-line SPI (this is the correct mode for an Pi). Final Connection should look like this: <img width="419" height="375" alt="Screenshot 2025-11-08 at 3 51 19 PM" src="https://github.com/user-attachments/assets/03d366e5-0eeb-480a-96f9-c8729dee2423" />
+   c)Connect Epaper ribbons to SPI controller and then connect SPI controller ribonns to driver. Make sure on the SPI controller modes are on the correct ones. For 4" displays and up the Display Config Switch should be on A=3R. Smaller displays should be set to 0.47R. The Interface Config switch should be set to 0 = 4-line SPI (this is the correct mode for an Pi). 
 
+   d)Connect 40 Pin Header to Raspberry Pi pins, making sure they align on top of each other, almost like stacking.
 
-   d)Connect 40 Pin Header to Raspberry Pi pins, making sure they align on top of each other, almost like stacking. 
+   Final Connection should look like this: <img width="419" height="375" alt="Screenshot 2025-11-08 at 3 51 19 PM" src="https://github.com/user-attachments/assets/03d366e5-0eeb-480a-96f9-c8729dee2423" />
 
 3. Testing
    First we must make sure that everything is working correctly by running Waveshare's testing code. This essentially just flashes a couple images to the display and if everything is connected properly and no issues happened you should be able to see those previews.
